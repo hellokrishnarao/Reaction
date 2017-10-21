@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JS Project | Reaction Game</title>
+	<meta charset="utf-8" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+	<style type="text/css">
+
+
+		body  {
+			font-family: 'Roboto', sans-serif;
+			
+		}
+		#box{
+
+				background: purple;
+				width: 150px;
+				height: 150px;
+				display: none;
+				position: relative;
+
+			}	
+
+	</style>
+
+
+</head>
+
+<body>
+
+<h1>Test Your Reaction!</h1>
+<h2>Click on the box/cirlces as quickly as possible!</h2>
+
+
+<p>Your reaction time is : <span id="time">0</span> seconds</p>
+
+<div id="box"></div>
+
+
+
+
+<script type="text/javascript">
+
+	function getRandomColor() {
+	    var letters = '0123456789ABCDEF'.split('');
+    	var color = '#';
+    	for (var i = 0; i < 6; i++ ) {
+        	color += letters[Math.floor(Math.random() * 16)];
+    	}
+    	return color;
+	}
+
+
+	var createdtime;
+	var clickedtime;
+	var reactiontime;
+
+	function makebox() {
+		
+ 	var x=0;
+ 	x=1500*Math.random(x); 
+	setTimeout(function () {
+	if(Math.random() > 0.5)
+		document.getElementById("box").style.borderRadius="50%";
+	else
+		document.getElementById("box").style.borderRadius="0";
+
+	var top=Math.random();
+	top= top*300;
+
+	var left=Math.random();
+	left= left*300;
+
+	document.getElementById("box").style.top=top+"px";
+	document.getElementById("box").style.left=left+"px";
+	
+
+
+
+	document.getElementById("box").style.backgroundColor=getRandomColor(); 
+	document.getElementById("box").style.display="block";
+	createdtime=Date.now();
+	},x);
+	}
+
+	document.getElementById("box").onclick=function()
+	 {
+	 	clickedtime=Date.now();
+	 	reactiontime=(clickedtime-createdtime)/1000;
+	 	document.getElementById("time").innerHTML=reactiontime;
+	 	this.style.display="none";
+	 	makebox();  
+	 }
+	makebox();
+	
+</script>
+
+
+</body>
+</html>
